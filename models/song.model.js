@@ -91,3 +91,19 @@ exports.updateSongPlayCount = (id) => {
 
     return true
 }
+
+exports.getSortedMostPlayedSong = () => {
+    const songs = playlist.sort((a, b) => {
+        return b.playCount - a.playCount
+    })
+    
+    return songs
+}
+
+exports.getSortedLeastPlayedSong = () => {
+    const songs = playlist.sort((a, b) => {
+        return a.playCount - b.playCount
+    })
+
+    return songs
+}

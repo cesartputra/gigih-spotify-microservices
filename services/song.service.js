@@ -7,7 +7,9 @@ const {
     addNewSong,
     updateSongById,
     deleteSongById,
-    updateSongPlayCount
+    updateSongPlayCount,
+    getSortedMostPlayedSong,
+    getSortedLeastPlayedSong
 } = require('../models/song.model')
 
 exports.getAllSongs = () => {
@@ -116,4 +118,30 @@ exports.updateSongPlayCount = (id) => {
             message: "Cannot delete song by id"
         }
     }
+}
+
+exports.getSortedMostPlayedSong = () => {
+    const songs = getSortedMostPlayedSong()
+    
+    if(!songs){
+        throw {
+            type: "not-found",
+            message: "Cannot found sorted most played song by play count"
+        }
+    }
+
+    return songs
+}
+
+exports.getSortedLeastPlayedSong = () => {
+    const songs = getSortedLeastPlayedSong()
+
+    if(!songs){
+        throw {
+            type: "not-found",
+            message: "Cannot found sorted least played song by play count"
+        }
+    }
+
+    return songs
 }

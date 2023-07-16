@@ -7,11 +7,34 @@ const {
     addNewSong,
     updateSongById,
     deleteSongById,
-    updateSongPlayCount
+    updateSongPlayCount,
+    getSortedMostPlayedSong,
+    getSortedLeastPlayedSong
 } = require('../controllers/song.controller')
 
 const express = require('express')
 const router = express.Router()
+
+router.get("/most", (req, res) => {
+    try {
+        const response = getSortedMostPlayedSong()
+
+        res.send(response)
+    } catch (err) {
+        res.status(400).send(err);
+    }
+})
+
+router.get("/least", (req, res) => {
+    try {
+        const response = getSortedLeastPlayedSong()
+
+        res.send(response)
+    } catch (err) {
+        res.status(400).send(err);
+    }
+})
+
 
 router.get("/artist", (req, res) => {
     try {
@@ -110,5 +133,7 @@ router.put("/:id/updatePlayCount", (req, res) => {
         res.status(400).send(err);
     }
 })
+
+
 
 module.exports = router;

@@ -7,7 +7,9 @@ const {
     addNewSong,
     updateSongById,
     deleteSongById,
-    updateSongPlayCount
+    updateSongPlayCount,
+    getSortedMostPlayedSong,
+    getSortedLeastPlayedSong
 } = require('../services/song.service')
 
 exports.getAllSongs = () => {
@@ -141,6 +143,36 @@ exports.updateSongPlayCount = (id) => {
         return {
             status: 'success',
             message: 'Successfully play song by id',
+        }
+    } catch (err) {
+        throw err
+    }
+}
+
+exports.getSortedMostPlayedSong = () => {
+    try {
+        const songs = getSortedMostPlayedSong()
+        console.log(songs);
+        return {
+            status: 'success',
+            data: {
+                songs
+            }
+        }
+    } catch (err) {
+        throw err
+    }
+}
+
+exports.getSortedLeastPlayedSong = () => {
+    try {
+        const songs = getSortedLeastPlayedSong()
+
+        return {
+            status: 'success',
+            data: {
+                songs
+            }
         }
     } catch (err) {
         throw err
